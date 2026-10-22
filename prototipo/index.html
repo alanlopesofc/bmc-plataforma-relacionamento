@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plataforma de Relacionamento BMC · níveis</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { min-height:100vh; display:grid; place-items:center; padding:24px; background:#f5f7fa; }
+    .level-chooser { width:min(960px,100%); display:grid; gap:32px; }
+    .chooser-head { display:grid; gap:10px; max-width:640px; }
+    .chooser-head h1 { color:#1b2430; font-size:clamp(28px,5vw,42px); line-height:1.05; letter-spacing:-.04em; }
+    .chooser-head p { color:#5d6878; }
+    .level-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .level-card { min-height:260px; display:flex; flex-direction:column; justify-content:space-between; padding:24px; border:1px solid #dfe4ea; border-radius:12px; background:#fff; }
+    .level-card:hover { border-color:#013088; }
+    .level-card h2 { margin-top:20px; font-size:24px; }
+    .level-card p { margin-top:8px; color:#5d6878; font-size:13px; }
+    .level-card .btn { align-self:flex-start; margin-top:24px; }
+    .level-card.select { color:#fff; background:#272936; border-color:#272936; }
+    .level-card.select p { color:#d8dbe2; }
+    .level-card.private { color:#f5f7fa; background:#0a0a0b; border-color:#3a3f47; }
+    .level-card.private p { color:#b2bac5; }
+    .level-card.private .btn { color:#0a0a0b; background:#e4e8ee; border-color:#e4e8ee; }
+    .chooser-mark { font-size:12px; font-weight:700; letter-spacing:.16em; }
+    @media (max-width:700px) { .level-grid { grid-template-columns:1fr; } .level-card { min-height:180px; } }
+  </style>
+</head>
+<body>
+  <main class="level-chooser" aria-labelledby="levels-title">
+    <div class="chooser-head"><p class="chooser-mark">BMC · PLATAFORMA DE RELACIONAMENTO</p><h1 id="levels-title">Escolha a tela de demonstração</h1><p>Uma experiência por nível, com a mesma base de relacionamento e uma linguagem visual própria.</p></div>
+    <div class="level-grid">
+      <a class="level-card" href="start.html"><div><span class="chooser-mark" style="color:#013088">START</span><h2>Reconhecer a parceria</h2><p>Azul BMC, leitura direta e foco no dia a dia da operação.</p></div><span class="btn btn-primary">Entrar no START</span></a>
+      <a class="level-card select" href="select.html"><div><span class="chooser-mark">SELECT</span><h2>Dar mais contexto</h2><p>Grafite e branco para uma experiência sóbria, objetiva e próxima.</p></div><span class="btn">Entrar no SELECT</span></a>
+      <a class="level-card private" href="private.html"><div><span class="chooser-mark">PRIVATE</span><h2>Valorizar a conquista</h2><p>Preto e aço escovado para uma presença mais reservada e exclusiva.</p></div><span class="btn">Entrar no PRIVATE</span></a>
+    </div>
+  </main>
+</body>
+</html>
