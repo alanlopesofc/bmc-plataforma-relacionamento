@@ -139,10 +139,10 @@ window.BMC_DATA = {
     }
    ],
    "achievement": {
-    "since": "2002-03-15",
+    "since": "2003-03-15",
     "timeline": [
      {
-      "date": "2002-03-15",
+      "date": "2003-03-15",
       "title": "Entrega da primeira máquina",
       "text": "O dia em que a sua frota BMC começou.",
       "kind": "delivery"
@@ -168,7 +168,7 @@ window.BMC_DATA = {
     ],
     "certificate": {
      "title": "Certificado de compra",
-     "issuedAt": "2002-03-15",
+     "issuedAt": "2003-03-15",
      "machine": "HX220L",
      "text": "A BMC reconhece esta máquina como patrimônio e trabalho de Cavalieri Terraplenagem (fictícia)."
     }
@@ -365,10 +365,10 @@ window.BMC_DATA = {
     }
    ],
    "achievement": {
-    "since": "2002-03-15",
+    "since": "2003-03-15",
     "timeline": [
      {
-      "date": "2002-03-15",
+      "date": "2003-03-15",
       "title": "Entrega da primeira máquina",
       "text": "O dia em que a sua frota BMC começou.",
       "kind": "delivery"
@@ -394,7 +394,7 @@ window.BMC_DATA = {
     ],
     "certificate": {
      "title": "Certificado de compra",
-     "issuedAt": "2002-03-15",
+     "issuedAt": "2003-03-15",
      "machine": "HX220L",
      "text": "A BMC reconhece esta máquina como patrimônio e trabalho de Cavalieri Terraplenagem (fictícia)."
     }
@@ -600,10 +600,10 @@ window.BMC_DATA = {
     }
    ],
    "achievement": {
-    "since": "2002-03-15",
+    "since": "2003-03-15",
     "timeline": [
      {
-      "date": "2002-03-15",
+      "date": "2003-03-15",
       "title": "Entrega da primeira máquina",
       "text": "O dia em que a sua frota BMC começou.",
       "kind": "delivery"
@@ -629,7 +629,7 @@ window.BMC_DATA = {
     ],
     "certificate": {
      "title": "Certificado de compra",
-     "issuedAt": "2002-03-15",
+     "issuedAt": "2003-03-15",
      "machine": "HX220L",
      "text": "A BMC reconhece esta máquina como patrimônio e trabalho de Cavalieri Terraplenagem (fictícia)."
     }

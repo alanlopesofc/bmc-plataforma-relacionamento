@@ -63,7 +63,7 @@
 
   function plaque(ctx) {
     var file = ctx.tier === "start" ? "plaqueta-start-final.png" : ctx.tier === "select" ? "plaqueta-select-final.png" : "plaqueta-private-final.png";
-    return '<div class="achievement-plaque" aria-label="Plaquinha Desde 2002 de Felipe Cavalieri"><div class="plaque-image"><img src="img/' + file + '" alt="Plaquinha ' + ctx.tier.toUpperCase() + ' com gravação BMC" aria-hidden="true"></div></div>';
+    return '<div class="achievement-plaque" aria-label="Plaquinha Desde 2003 de Felipe Cavalieri"><div class="plaque-image"><img src="img/' + file + '" alt="Plaquinha ' + ctx.tier.toUpperCase() + ' com gravação BMC" aria-hidden="true"></div></div>';
   }
 
   BMC.screens.home = function (ctx) {
@@ -91,7 +91,7 @@
     var tl = '<ol class="timeline">' + a.timeline.map(function (e) {
       return "<li><time datetime=\"" + ctx.h(e.date) + "\">" + ctx.fmtDate(e.date) + "</time><h3>" + ctx.h(e.title) + '</h3><p class="muted">' + ctx.h(e.text) + "</p></li>";
     }).join("") + "</ol>";
-    return '<section class="screen" aria-labelledby="ach-title">' + head("ach-title", "Minha conquista", "Cliente BMC desde 2002.") + '<p class="founder-seal">Desde 2002 · o ano em que a BMC nasceu</p>' +
+    return '<section class="screen" aria-labelledby="ach-title">' + head("ach-title", "Minha conquista", "Cliente BMC desde 2003.") + '<p class="founder-seal">Desde 2003 · o ano em que a BMC nasceu</p>' +
       '<div class="grid-2"><div class="card"><div class="card-header"><h3 class="card-title">Linha do tempo</h3></div><div class="card-body">' + tl + "</div></div>" +
       '<div class="card"><div class="card-header"><h3 class="card-title">' + ctx.h(cert.title) + '</h3><p class="card-desc">Emitido em ' + ctx.fmtDate(cert.issuedAt) + '</p></div>' +
       '<div class="cert">' + BMC.logo(ctx.tier, "cert") + plaque(ctx) + '<div class="cert-title">Hyundai ' + ctx.h(cert.machine) + '</div><p class="muted">' + ctx.h(cert.text) + "</p>" +

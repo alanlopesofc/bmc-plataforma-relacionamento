@@ -1,19 +1,63 @@
 (() => {
-  const deck=document.querySelector('#deck'),slides=[...document.querySelectorAll('.slide')],dots=document.querySelector('.progress__dots'),count=document.querySelector('#current-slide'),total=document.querySelector('#total-slides'),reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;let active=0,logoPlayed=false;
-  total.textContent=String(slides.length).padStart(2,'0');
-  slides.forEach((slide,index)=>{const dot=document.createElement('button');dot.className='progress__dot';dot.type='button';dot.setAttribute('role','tab');dot.setAttribute('aria-label',`${String(index+1).padStart(2,'0')} · ${slide.dataset.label}`);dot.addEventListener('click',()=>goTo(index,false));dots.appendChild(dot)});
-  const dotEls=[...dots.children];
-  function update(index){active=index;slides.forEach((slide,i)=>slide.classList.toggle('is-active',i===index));dotEls.forEach((dot,i)=>dot.setAttribute('aria-selected',i===index?'true':'false'));count.textContent=String(index+1).padStart(2,'0');if(index===1&&!logoPlayed)playLogo();if(index===slides.length-1&&!closingPlayed)playClosing()}
-  function goTo(index,animate=true){const next=Math.max(0,Math.min(slides.length-1,index));slides[next].scrollIntoView({behavior:reduced||!animate?'auto':'smooth',block:'start'});update(next)}
-  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&entry.intersectionRatio>.6)update(slides.indexOf(entry.target))}),{root:deck,threshold:[.6]});slides.forEach(slide=>observer.observe(slide));
-  document.addEventListener('keydown',event=>{if(['ArrowDown','PageDown',' '].includes(event.key)){event.preventDefault();goTo(active+1)}if(['ArrowUp','PageUp'].includes(event.key)){event.preventDefault();goTo(active-1)}if(event.key==='Home'){event.preventDefault();goTo(0)}if(event.key==='End'){event.preventDefault();goTo(slides.length-1)}});
-  let closingPlayed=false;
-  function playLogo(){logoPlayed=true;const caption=document.querySelector('#logo-caption'),tier=document.querySelector('#logo-tier'),stage=document.querySelector('#logo-stage'),lanca=stage.querySelector('.logo-part--lanca'),braco=stage.querySelector('.logo-part--braco'),esteira=stage.querySelector('.logo-part--esteira'),wordmark=stage.querySelector('.logo-stage__wordmark'),captions=['A lança é o dono. É ele quem sustenta a obra.','O braço e a concha são a BMC. Trabalham junto, encaixados.','O encaixe é a relação: nem acima, nem abaixo. Junto.','E tudo apoiado no chão da obra.'];
-    if(reduced||!window.gsap){caption.textContent=captions[3];[lanca,braco,esteira,wordmark].forEach(el=>{el.style.opacity=1;el.style.transform='none'});return}
-    const setCaption=text=>{caption.textContent=text};gsap.set([lanca,braco,esteira,wordmark],{opacity:0});gsap.set(lanca,{x:-18,y:10,scale:.94});gsap.set(braco,{x:18,y:-12,scale:.94});gsap.set(esteira,{y:12,scaleX:.6,transformOrigin:'left center'});
-    const setStageTheme=(background,lanca,braco)=>{stage.style.background=background;stage.style.setProperty('--sym-lanca',lanca);stage.style.setProperty('--sym-braco',braco);stage.style.setProperty('--sym-esteira',braco)};
-    gsap.timeline({defaults:{ease:'power3.out'}}).to(lanca,{opacity:1,x:0,y:0,scale:1,duration:.62}).call(()=>setCaption(captions[1])).to(braco,{opacity:1,x:0,y:0,scale:1,duration:.72},'+=.35').call(()=>setCaption(captions[2])).to(braco,{scale:1.04,duration:.2,yoyo:true,repeat:1,ease:'sine.inOut'},'+=.25').call(()=>setCaption(captions[3])).to(esteira,{opacity:1,y:0,scaleX:1,duration:.52},'+=.28').to([lanca,braco,esteira],{x:-100,duration:.65,ease:'power2.inOut'},'+=.5').to(wordmark,{opacity:1,x:0,duration:.5},'-=.25').call(()=>{tier.textContent='SELECT';tier.classList.add('tier-corners');setStageTheme('#272936','#fff','#a9b1bd')}).to(wordmark,{x:-2,duration:.3}).call(()=>{tier.textContent='PRIVATE';tier.classList.remove('tier-corners');tier.classList.add('tier-plate');setStageTheme('#0a0a0b','#e4e8ee','#8e97a6')});
+  const deck = document.querySelector('#deck');
+  const slides = [...document.querySelectorAll('.slide')];
+  const dots = document.querySelector('.progress__dots');
+  const count = document.querySelector('#current-slide');
+  const total = document.querySelector('#total-slides');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let active = 0;
+
+  total.textContent = String(slides.length).padStart(2, '0');
+  slides.forEach((slide, index) => {
+    const eyebrow = slide.querySelector('.eyebrow');
+    if (eyebrow && /^\d{2} /.test(eyebrow.textContent)) {
+      eyebrow.textContent = eyebrow.textContent.replace(/^\d{2}/, String(index + 1).padStart(2, '0'));
+    }
+  });
+  slides.forEach((slide, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'progress__dot';
+    dot.type = 'button';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `${String(index + 1).padStart(2, '0')} · ${slide.dataset.label}`);
+    dot.addEventListener('click', () => goTo(index));
+    dots.appendChild(dot);
+  });
+  const dotEls = [...dots.children];
+
+  function update(index) {
+    active = index;
+    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+    dotEls.forEach((dot, i) => dot.setAttribute('aria-selected', i === index ? 'true' : 'false'));
+    count.textContent = String(index + 1).padStart(2, '0');
   }
-  function playClosing(){closingPlayed=true;const mark=document.querySelector('.closing__mark'),parts=[...mark.querySelectorAll('.closing-part')];if(reduced||!window.gsap){parts.forEach(part=>{part.style.opacity=1;part.style.transform='none'});return}const [lanca,braco,esteira]=parts;gsap.set(parts,{opacity:0});gsap.set(lanca,{x:-24,y:12,scale:.92});gsap.set(braco,{x:22,y:-14,scale:.92});gsap.set(esteira,{y:16,scaleX:.55,transformOrigin:'left center'});gsap.timeline({defaults:{ease:'power3.out'}}).to(lanca,{opacity:1,x:0,y:0,scale:1,duration:.62}).to(braco,{opacity:1,x:0,y:0,scale:1,duration:.72},'+=.24').to(esteira,{opacity:1,y:0,scaleX:1,duration:.52},'+=.24')}
+
+  function goTo(index, animate = true) {
+    const next = Math.max(0, Math.min(slides.length - 1, index));
+    slides[next].scrollIntoView({ behavior: reduced || !animate ? 'auto' : 'smooth', block: 'start' });
+    update(next);
+  }
+
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.6) update(slides.indexOf(entry.target));
+    }),
+    { root: deck, threshold: [0.6] }
+  );
+  slides.forEach(slide => observer.observe(slide));
+
+  document.addEventListener('keydown', event => {
+    if (['ArrowDown', 'PageDown', ' '].includes(event.key)) {
+      event.preventDefault();
+      goTo(active + 1);
+    }
+    if (['ArrowUp', 'PageUp'].includes(event.key)) {
+      event.preventDefault();
+      goTo(active - 1);
+    }
+    if (event.key === 'Home') { event.preventDefault(); goTo(0); }
+    if (event.key === 'End') { event.preventDefault(); goTo(slides.length - 1); }
+  });
+
   update(0);
 })();
