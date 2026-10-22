@@ -1,8 +1,9 @@
-# Plataforma de relacionamento BMC — protótipo e brand book
+# Plataforma de relacionamento BMC
 
 BMC START · BMC SELECT · BMC PRIVATE
 
-- **Protótipo navegável:** `prototipo/index.html` (uma página por nível, dados fictícios)
-- **Brand book:** `brandbook/index.html`
+- **Protótipo navegável:** `prototipo/` (uma página por nível)
+- **Brand book:** `brandbook/` (ideia, níveis, tipografia, cores e peças de experiência por nível)
 
-Protótipo de interface em desenvolvimento. Dados fictícios, exceto o easter egg do founder.
+Site: https://alanlopesofc.github.io/bmc-plataforma-relacionamento/
+Dados do protótipo são ilustrativos.

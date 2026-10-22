@@ -62,11 +62,8 @@
   }
 
   function plaque(ctx) {
-    var engraving = ctx.tier === "start" ? "plaque-start" : ctx.tier === "select" ? "plaque-select" : "plaque-private";
-    var file = ctx.tier === "start" ? "plaqueta-start.png" : ctx.tier === "select" ? "plaqueta-select.png" : "plaqueta-private.png";
-    return '<div class="achievement-plaque ' + engraving + '" aria-label="Plaquinha Desde 2002 de Felipe Cavalieri">' +
-      '<div class="plaque-image"><img src="img/' + file + '" alt="" aria-hidden="true"><div class="plaque-engraving">' +
-      BMC.symbol() + '<strong>FELIPE CAVALIERI</strong><span>CLIENTE BMC DESDE 2002</span></div></div></div>';
+    var file = ctx.tier === "start" ? "plaqueta-start-final.png" : ctx.tier === "select" ? "plaqueta-select-final.png" : "plaqueta-private-final.png";
+    return '<div class="achievement-plaque" aria-label="Plaquinha Desde 2002 de Felipe Cavalieri"><div class="plaque-image"><img src="img/' + file + '" alt="Plaquinha ' + ctx.tier.toUpperCase() + ' com gravação BMC" aria-hidden="true"></div></div>';
   }
 
   BMC.screens.home = function (ctx) {
