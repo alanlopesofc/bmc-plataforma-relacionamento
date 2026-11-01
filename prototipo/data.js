@@ -1,4 +1,4 @@
-/* Dados 100% fictícios (regra 7). Pontos, metas e cotas: [HIPÓTESE] até o Gate A. O front só exibe; nada é calculado aqui no navegador. */
+/* Dados 100% fictícios (regra 7). Pontos, metas e mínimos: [HIPÓTESE] até o Gate A. O front só exibe; nada é calculado aqui no navegador. */
 window.BMC_DATA = {
  "customer": {
   "name": "Felipe Cavalieri",
@@ -13,7 +13,7 @@ window.BMC_DATA = {
   "select": "SELECT",
   "private": "PRIVATE"
  },
- "hypothesisNote": "Pontos, metas e cotas são fictícios e [HIPÓTESE] até o Gate A.",
+ "hypothesisNote": "Pontos, metas e mínimos são fictícios e [HIPÓTESE] até o Gate A. A pontuação é anual: zera em 1º de janeiro e o total do ano define o nível do ano seguinte.",
  "byTier": {
   "start": {
    "levelLabel": "START",
@@ -65,21 +65,21 @@ window.BMC_DATA = {
      null
     ],
     "goal": [
-     125,
-     250,
-     375,
+     100,
+     200,
+     300,
+     400,
      500,
-     625,
-     750,
-     875,
+     600,
+     700,
+     800,
+     900,
      1000,
-     1125,
-     1250,
-     1375,
-     1500
+     1100,
+     1200
     ],
-    "goalLabel": "Meta para o SELECT (1.500 pts) [HIPÓTESE]",
-    "gapLabel": "Faltam 860 pontos para o SELECT"
+    "goalLabel": "Meta para subir ao SELECT (1.200 pts/ano) [HIPÓTESE]",
+    "gapLabel": "Sem mínimo para manter o START · faltam 560 pontos para o SELECT"
    },
    "fleet": [
     {
@@ -176,8 +176,8 @@ window.BMC_DATA = {
    "score": {
     "nextLevel": {
      "label": "SELECT",
-     "gap": "Faltam 860 pontos para o SELECT",
-     "progress": 43
+     "gap": "Faltam 560 pontos para o SELECT (1.200 pts no ano)",
+     "progress": 53
     },
     "rules": [
      {
@@ -191,6 +191,10 @@ window.BMC_DATA = {
      {
       "rule": "Ordem de serviço concluída",
       "points": "+60 pts [HIPÓTESE]"
+     },
+     {
+      "rule": "Curso concluído no Academy",
+      "points": "+40 pts [HIPÓTESE]"
      }
     ],
     "ledger": [
@@ -229,7 +233,20 @@ window.BMC_DATA = {
       "points": 70,
       "balance": 490
      }
-    ]
+    ],
+    "keep": {
+     "title": "Sem pontuação mínima",
+     "text": "No START você continua no programa sem meta de pontos. Tudo o que somar conta para subir ao SELECT.",
+     "progress": null
+    }
+   },
+   "meter": {
+    "current": 640,
+    "fill": 53,
+    "keep": null,
+    "right": "SELECT 1.200",
+    "status": "Sem mínimo para manter · faltam 560 para o SELECT",
+    "aria": "640 pontos no ano. O START não tem mínimo. Faltam 560 para o SELECT."
    }
   },
   "select": {
@@ -282,21 +299,36 @@ window.BMC_DATA = {
      null
     ],
     "goal": [
-     333,
-     667,
-     1000,
-     1333,
+     208,
+     417,
+     625,
+     833,
+     1042,
+     1250,
+     1458,
      1667,
-     2000,
-     2333,
-     2667,
-     3000,
-     3333,
-     3667,
-     4000
+     1875,
+     2083,
+     2292,
+     2500
     ],
-    "goalLabel": "Meta para o PRIVATE (4.000 pts) [HIPÓTESE]",
-    "gapLabel": "Faltam 2.080 pontos para o PRIVATE"
+    "goalLabel": "Meta para subir ao PRIVATE (2.500 pts/ano) [HIPÓTESE]",
+    "gapLabel": "Permanência no SELECT garantida · faltam 580 pontos para o PRIVATE",
+    "keep": [
+     83,
+     167,
+     250,
+     333,
+     417,
+     500,
+     583,
+     667,
+     750,
+     833,
+     917,
+     1000
+    ],
+    "keepLabel": "Mínimo para manter o SELECT (1.000 pts/ano)"
    },
    "fleet": [
     {
@@ -402,8 +434,8 @@ window.BMC_DATA = {
    "score": {
     "nextLevel": {
      "label": "PRIVATE",
-     "gap": "Faltam 2.080 pontos para o PRIVATE",
-     "progress": 48
+     "gap": "Faltam 580 pontos para o PRIVATE (2.500 pts no ano)",
+     "progress": 77
     },
     "rules": [
      {
@@ -417,6 +449,10 @@ window.BMC_DATA = {
      {
       "rule": "Ordem de serviço concluída",
       "points": "+60 pts [HIPÓTESE]"
+     },
+     {
+      "rule": "Curso concluído no Academy",
+      "points": "+40 pts [HIPÓTESE]"
      }
     ],
     "ledger": [
@@ -455,7 +491,21 @@ window.BMC_DATA = {
       "points": 230,
       "balance": 1420
      }
-    ]
+    ],
+    "keep": {
+     "title": "Mínimo de 1.000 pts no ano",
+     "text": "Você já tem 1.920 pts em 2026: o SELECT está garantido para 2027. Abaixo de 1.000, o nível volta ao START.",
+     "progress": 100
+    }
+   },
+   "meter": {
+    "current": 1920,
+    "fill": 77,
+    "keep": 40,
+    "keepLabel": "mín. 1.000",
+    "right": "PRIVATE 2.500",
+    "status": "Permanência garantida · faltam 580 para o PRIVATE",
+    "aria": "1.920 pontos no ano. Mínimo para manter o SELECT: 1.000. Faltam 580 para o PRIVATE."
    }
   },
   "private": {
@@ -508,21 +558,21 @@ window.BMC_DATA = {
      null
     ],
     "goal": [
-     333,
-     667,
-     1000,
-     1333,
+     417,
+     833,
+     1250,
      1667,
-     2000,
-     2333,
-     2667,
-     3000,
+     2083,
+     2500,
+     2917,
      3333,
-     3667,
-     4000
+     3750,
+     4167,
+     4583,
+     5000
     ],
-    "goalLabel": "Cota anual para manter o PRIVATE (4.000 pts) [HIPÓTESE]",
-    "gapLabel": "Você já superou a cota anual: continue assim"
+    "goalLabel": "Mínimo para manter o PRIVATE (5.000 pts/ano) [HIPÓTESE]",
+    "gapLabel": "Faltam 650 pontos para manter o PRIVATE em 2027 · no ritmo atual você chega em novembro"
    },
    "fleet": [
     {
@@ -637,7 +687,7 @@ window.BMC_DATA = {
    "score": {
     "nextLevel": {
      "label": null,
-     "gap": "Você já superou a cota anual: continue assim"
+     "gap": "Para continuar no PRIVATE, some 5.000 pts no ano. Abaixo disso, o nível de 2027 volta a ser SELECT."
     },
     "rules": [
      {
@@ -651,6 +701,10 @@ window.BMC_DATA = {
      {
       "rule": "Ordem de serviço concluída",
       "points": "+60 pts [HIPÓTESE]"
+     },
+     {
+      "rule": "Curso concluído no Academy",
+      "points": "+40 pts [HIPÓTESE]"
      }
     ],
     "ledger": [
@@ -689,7 +743,21 @@ window.BMC_DATA = {
       "points": 500,
       "balance": 3430
      }
-    ]
+    ],
+    "keep": {
+     "title": "Mínimo de 5.000 pts no ano",
+     "text": "Você tem 4.350 pts em 2026. Faltam 650 para garantir o PRIVATE em 2027; se não chegar, volta ao SELECT.",
+     "progress": 87
+    }
+   },
+   "meter": {
+    "current": 4350,
+    "fill": 73,
+    "keep": 83,
+    "keepLabel": "mín. 5.000",
+    "right": "mín. 5.000",
+    "status": "Faltam 650 para manter o PRIVATE",
+    "aria": "4.350 pontos no ano. Mínimo para manter o PRIVATE: 5.000. Faltam 650."
    }
   }
  },
@@ -828,5 +896,206 @@ window.BMC_DATA = {
     "benefit": "Condição para clientes BMC [a definir]"
    }
   ]
+ },
+ "rulesSummary": [
+  {
+   "tier": "start",
+   "keep": "Sem pontuação mínima",
+   "up": "1.200 pts no ano para subir ao SELECT"
+  },
+  {
+   "tier": "select",
+   "keep": "Mínimo de 1.000 pts no ano para manter; abaixo disso volta ao START",
+   "up": "2.500 pts no ano para subir ao PRIVATE"
+  },
+  {
+   "tier": "private",
+   "keep": "Mínimo de 5.000 pts no ano para manter; abaixo disso volta ao SELECT",
+   "up": "Nível mais alto"
+  }
+ ],
+ "community": {
+  "members": "1.240 clientes",
+  "online": "38 online agora",
+  "topics": [
+   "Peças",
+   "Serviços",
+   "Consumo",
+   "Operação"
+  ],
+  "rules": [
+   "Troque experiência real de campo",
+   "Sem venda ou anúncio de terceiros",
+   "A equipe técnica BMC acompanha e responde"
+  ],
+  "trending": [
+   {
+    "tag": "Consumo",
+    "title": "Modo E x modo P no dia a dia"
+   },
+   {
+    "tag": "Peças",
+    "title": "Filtro original x paralelo"
+   },
+   {
+    "tag": "Operação",
+    "title": "Checklist antes de ligar"
+   }
+  ],
+  "posts": [
+   {
+    "id": "p1",
+    "author": "Marcos A.",
+    "initials": "MA",
+    "place": "Rio Verde, GO",
+    "tier": "select",
+    "date": "2026-10-29",
+    "topic": "Consumo",
+    "title": "O diesel da HX220L caiu depois que ajustei o modo de potência",
+    "text": "Passei a usar o modo econômico nas cargas leves e o de potência só no rompedor. Em três semanas a média foi de 18 para cerca de 16 L/h. Alguém já testou na HX260?",
+    "machine": "HX220L",
+    "useful": 31,
+    "replies": 9,
+    "bmc": "Boa prática. O modo econômico atende a maior parte das aplicações de carga; vale conferir também a marcha lenta automática. Equipe técnica BMC [exemplo]"
+   },
+   {
+    "id": "p2",
+    "author": "Paulo H.",
+    "initials": "PH",
+    "place": "Cuiabá, MT",
+    "tier": "select",
+    "date": "2026-10-27",
+    "topic": "Operação",
+    "title": "Minha rotina de 10 minutos antes de ligar a máquina",
+    "text": "Nível de óleo e de líquido de arrefecimento, drenar a água do separador, olhar mangueiras e engraxar os pinos da lança. Colei a lista no vidro da cabine e os operadores passaram a seguir.",
+    "machine": "HX260L",
+    "useful": 45,
+    "replies": 11
+   },
+   {
+    "id": "p3",
+    "author": "Juliana R.",
+    "initials": "JR",
+    "place": "Uberlândia, MG",
+    "tier": "private",
+    "date": "2026-10-24",
+    "topic": "Peças",
+    "title": "Filtro de combustível: original x paralelo, o que vi na prática",
+    "text": "Testei paralelo em duas máquinas por seis meses. Numa delas o bico injetor precisou de limpeza antes da hora. Voltei para o original e fiz as contas do custo por hora. Compartilho a planilha com quem quiser.",
+    "machine": "HL955",
+    "useful": 22,
+    "replies": 14
+   },
+   {
+    "id": "p4",
+    "author": "Sérgio T.",
+    "initials": "ST",
+    "place": "Anápolis, GO",
+    "tier": "start",
+    "date": "2026-10-21",
+    "topic": "Serviços",
+    "title": "Primeira revisão de 250 h: o que deixar pronto para o técnico?",
+    "text": "Comprei minha primeira Hyundai e a revisão de 250 h está chegando. Quem já passou por isso: o que vale deixar separado para o atendimento render?",
+    "machine": "HX145",
+    "useful": 12,
+    "replies": 7
+   },
+   {
+    "id": "p5",
+    "author": "Ana L.",
+    "initials": "AL",
+    "place": "Palmas, TO",
+    "tier": "start",
+    "date": "2026-10-18",
+    "topic": "Peças",
+    "title": "Dente de caçamba gastando rápido em cascalho",
+    "text": "Troquei os dentes há dois meses e já estão no fim. Trabalho em cascalho e laterita. Alguém indica um perfil de dente melhor para esse solo?",
+    "machine": "HX220L",
+    "useful": 8,
+    "replies": 5
+   }
+  ]
+ },
+ "academy": {
+  "stats": [
+   {
+    "label": "Cursos concluídos",
+    "value": "1"
+   },
+   {
+    "label": "Horas de treino",
+    "value": "2,4 h"
+   },
+   {
+    "label": "Certificados",
+    "value": "1"
+   },
+   {
+    "label": "Operadores no Academy",
+    "value": "3"
+   }
+  ],
+  "featured": {
+   "tag": "Operação eficiente",
+   "title": "Economia de combustível na prática",
+   "lesson": "Aula 4 de 5 · Marcha lenta e tempo de ciclo",
+   "progress": 60,
+   "duration": "42 min"
+  },
+  "courses": [
+   {
+    "tag": "Manutenção",
+    "title": "Plano de revisão de 250 h a 2.000 h",
+    "lessons": 6,
+    "duration": "55 min",
+    "progress": 100,
+    "format": "Vídeo"
+   },
+   {
+    "tag": "Operação",
+    "title": "Inspeção diária em 10 minutos",
+    "lessons": 3,
+    "duration": "18 min",
+    "progress": 0,
+    "format": "Vídeo + checklist"
+   },
+   {
+    "tag": "Tecnologia",
+    "title": "Como ler o painel e os alertas da Hyundai",
+    "lessons": 4,
+    "duration": "30 min",
+    "progress": 25,
+    "format": "Vídeo"
+   },
+   {
+    "tag": "Segurança",
+    "title": "Segurança na operação e no transporte",
+    "lessons": 5,
+    "duration": "40 min",
+    "progress": 0,
+    "format": "Vídeo"
+   },
+   {
+    "tag": "Gestão",
+    "title": "Custo por hora da sua frota",
+    "lessons": 4,
+    "duration": "35 min",
+    "progress": 0,
+    "format": "Guia + planilha"
+   },
+   {
+    "tag": "Peças",
+    "title": "Desgaste de material rodante: quando trocar",
+    "lessons": 3,
+    "duration": "24 min",
+    "progress": 0,
+    "format": "Vídeo"
+   }
+  ],
+  "live": {
+   "title": "Ao vivo com a engenharia: sistema hidráulico",
+   "when": "Data a confirmar com a BMC",
+   "text": "Perguntas dos clientes respondidas pela equipe técnica. Fica gravado no Academy."
+  }
  }
 };

@@ -28,7 +28,7 @@
   function chart(ctx) {
     var c = ctx.t.chart, narrow = window.innerWidth < 640;
     var W = narrow ? 340 : 760, H = narrow ? 230 : 280, L = narrow ? 40 : 46, R = 14, T = 14, B = 30;
-    var all = c.goal.concat(c.accumulated.filter(function (v) { return v !== null; }));
+    var all = c.goal.concat(c.keep || [], c.accumulated.filter(function (v) { return v !== null; }));
     var step = 1000, max = Math.ceil(Math.max.apply(null, all) / step) * step;
     var n = c.months.length;
     function x(i) { return L + (W - L - R) * i / (n - 1); }
@@ -45,6 +45,7 @@
     c.accumulated.forEach(function (v, i) { if (v !== null) { pts.push(x(i).toFixed(1) + "," + y(v).toFixed(1)); last = i; } });
     var area = "M" + pts[0] + " L" + pts.join(" L") + " L" + x(last).toFixed(1) + "," + y(0) + " L" + x(0).toFixed(1) + "," + y(0) + " Z";
     var goal = c.goal.map(function (v, i) { return x(i).toFixed(1) + "," + y(v).toFixed(1); }).join(" ");
+    var keep = c.keep ? c.keep.map(function (v, i) { return x(i).toFixed(1) + "," + y(v).toFixed(1); }).join(" ") : "";
     var gid = "areaGrad";
     var rows = c.months.map(function (m, i) {
       return "<tr><th scope=\"row\">" + ctx.h(m) + "</th><td>" + (c.accumulated[i] === null ? "sem dado" : ctx.fmtNumber(c.accumulated[i])) + "</td><td>" + ctx.fmtNumber(c.goal[i]) + "</td></tr>";
@@ -54,9 +55,10 @@
       grid + xs +
       '<path class="chart-area" d="' + area + '" fill="url(#' + gid + ')"/>' +
       '<polyline class="chart-goal" points="' + goal + '"/>' +
+      (keep ? '<polyline class="chart-keep" points="' + keep + '"/>' : "") +
       '<polyline class="chart-acc" pathLength="1" points="' + pts.join(" ") + '"/>' +
       '<circle class="chart-dot" r="5" cx="' + x(last).toFixed(1) + '" cy="' + y(c.accumulated[last]).toFixed(1) + '"/></svg></div>' +
-      '<div class="legend"><span><i></i>Pontos acumulados</span><span><i class="dash"></i>' + ctx.h(c.goalLabel) + "</span></div>" +
+      '<div class="legend"><span><i></i>Pontos acumulados</span><span><i class="dash"></i>' + ctx.h(c.goalLabel) + "</span>" + (c.keep ? '<span><i class="dot-line"></i>' + ctx.h(c.keepLabel) + "</span>" : "") + "</div>" +
       '<p class="gap-line">' + ctx.h(c.gapLabel) + "</p>" +
       '<table class="sr-only"><caption>Pontos acumulados e meta por mês</caption><thead><tr><th>Mês</th><th>Acumulado</th><th>Meta</th></tr></thead><tbody>' + rows + "</tbody></table>";
   }
@@ -109,7 +111,9 @@
       ? '<p><strong>Próximo nível: ' + ctx.h(s.nextLevel.label) + '</strong></p><p class="muted">' + ctx.h(s.nextLevel.gap) + "</p>"
       : '<p><strong>Você está no nível mais alto.</strong></p><p class="muted">' + ctx.h(s.nextLevel.gap) + "</p>";
     return '<section class="screen" aria-labelledby="score-title">' + head("score-title", "Pontuação", "Cada ponto tem uma origem. Valores fictícios [HIPÓTESE].") +
-      '<div class="card"><div class="card-header"><h3 class="card-title">Para o próximo nível</h3></div><div class="card-body stack">' + next + (s.nextLevel.progress != null ? bar(s.nextLevel.progress, "Progresso até o próximo nível") : "") + "</div></div>" +
+      '<div class="grid-2"><div class="card"><div class="card-header"><h3 class="card-title">Para manter seu nível</h3><p class="card-desc">Pontuação anual: zera em 1º de janeiro [HIPÓTESE]</p></div><div class="card-body stack"><p><strong>' + ctx.h(s.keep.title) + '</strong></p><p class="muted">' + ctx.h(s.keep.text) + "</p>" + (s.keep.progress != null ? bar(s.keep.progress, "Progresso até o mínimo do nível") : "") + "</div></div>" +
+      '<div class="card"><div class="card-header"><h3 class="card-title">Para o próximo nível</h3><p class="card-desc">Total de pontos no ano</p></div><div class="card-body stack">' + next + (s.nextLevel.progress != null ? bar(s.nextLevel.progress, "Progresso até o próximo nível") : "") + "</div></div></div>" +
+      '<div class="card"><div class="card-header"><h3 class="card-title">Regras dos níveis</h3></div><div class="card-body tier-rules">' + ctx.data.rulesSummary.map(function (r) { return '<div class="tier-rule' + (r.tier === ctx.tier ? " is-current" : "") + '"><strong>' + ctx.h(ctx.data.tierNames[r.tier]) + (r.tier === ctx.tier ? ' <span class="badge badge-info">seu nível</span>' : "") + '</strong><span>' + ctx.h(r.keep) + '</span><span class="muted">' + ctx.h(r.up) + "</span></div>"; }).join("") + "</div></div>" +
       '<div class="grid-2"><div class="card"><div class="card-header"><h3 class="card-title">Como sua pontuação soma</h3></div><div class="card-body">' + rules + "</div></div>" +
       '<div class="card"><div class="card-header"><h3 class="card-title">Extrato descrito</h3></div><div class="card-body">' + ledger + "</div></div></div></section>";
   };
